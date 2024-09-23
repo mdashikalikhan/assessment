@@ -14,7 +14,7 @@ public class ExternalController {
 
     private ExternalService externalService;
 
-    @GetMapping("/google")
+    @GetMapping("/api")
     public ResponseEntity<String> getExternalContents(){
         String response = externalService.getApiContents();
         return ResponseEntity.ok(response);
