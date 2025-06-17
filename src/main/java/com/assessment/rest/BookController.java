@@ -52,11 +52,12 @@ public class BookController {
     }
 
     @GetMapping("/title/{title}")
-    public ResponseEntity<PagedModel<BookDto>> getBookById(@NotNull  @PathVariable String title,
+    public ResponseEntity<PagedModel<BookDto>> getBookByTitle(@NotNull  @PathVariable String title,
                                                            @PageableDefault(size = 1) Pageable pageable) {
         Page<BookDto> bookPage  =  bookService.getBooksByTitle(title, pageable);
         PagedModel<BookDto> pagedModel = new PagedModel<>(bookPage);
         return ResponseEntity.ok(pagedModel);
+
 
     }
 }
