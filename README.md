@@ -3,6 +3,41 @@ This is a pilot project of Spring boot 3  with in memory DB
 
 <br/>
 
+For monitoring, this app is exposed prometheus micrometer metrics on port 7179
+<b>http://localhost:7179/actuator/prometheus </b>
+
+Setup prometheus on docker:
+
+<b>
+docker run -d   --name prometheus   -p 9090:9090  -v E:/DEV_INTJTDEA/assessment/src/main/resources/prometheus.yml:/etc/prometheus/prometheus.yml   prom/prometheus
+</b>
+
+Setup grafana on docker:
+
+<b>
+docker run -d --name=grafana -p 3000:3000 grafana/grafana
+</b>
+
+Add prometheus data source in grafana:
+<b>
+http://host.docker.internal:9090
+</b>
+
+Grafana URL: http://localhost:3000
+
+Prometheus URL: http://localhost:9090/targets
+
+Set up garana dashboard using foolowing id:
+
+<ul>
+<li>4701 → Micrometer JVM dashboard</li>
+
+<li>10231 → Spring Boot Micrometer</li>
+
+<li> 12900 → JVM Overview</li>
+<ul>
+
+
 The application will start on <b>http://localhost:8080</b>
 <br/><br/>
 Access in memory H2 database at <b>http://localhost:8080/h2</b>
