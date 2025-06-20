@@ -18,7 +18,11 @@
 		<license/>
 	</licenses>
 	<developers>
-		<developer>Md. Ashik Ali Khan</developer>
+		<developer>
+			<id>ashik</id>
+			<name>Md. Ashik Ali Khan</name>
+			<email>khan.ashik@gmail.com</email>
+		</developer>
 	</developers>
 	<scm>
 		<connection/>
