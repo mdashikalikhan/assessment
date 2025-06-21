@@ -118,7 +118,11 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
+				<filtering>false</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/resources-filtered</directory>
+				<filtering>true</filtering> <!-- this one will replace @...@ -->
 			</resource>
 		</resources>
 	</build>
