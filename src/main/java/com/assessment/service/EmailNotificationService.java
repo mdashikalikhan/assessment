@@ -2,7 +2,7 @@ package com.assessment.service;
 
 import org.springframework.stereotype.Service;
 
-@Service("EmailService")
+@Service("emailService")
 public class EmailNotificationService implements NotificationService {
     @Override
     public void send(String message) {

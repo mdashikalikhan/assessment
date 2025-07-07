@@ -1,5 +1,6 @@
 package com.assessment;
 
+import com.assessment.components.DynamicNotificationManager;
 import com.assessment.components.NotficationManager;
 import com.assessment.dao.BookDao;
 import com.assessment.dao.CustomerDao;
@@ -87,6 +88,15 @@ public class AssessmentApplication {
     public CommandLineRunner   notify(NotficationManager notficationManager){
         return (args) -> {
           notficationManager.notifyUser("Notify user");
+        };
+    }
+
+    @Bean
+    public CommandLineRunner notifyByType(DynamicNotificationManager notificationManager){
+        return args -> {
+            notificationManager.notifyUser("walletService", "wallet message");
+            notificationManager.notifyUser("smsService", "SMS message");
+            notificationManager.notifyUser("emailService", "Email message");
         };
     }
 

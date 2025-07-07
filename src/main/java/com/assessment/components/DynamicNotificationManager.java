@@ -14,5 +14,17 @@ public class DynamicNotificationManager {
         this.notifications = notifications;
     }
 
+    public void notifyUser(String type, String message){
+
+        NotificationService notificationService = notifications.get(type);
+
+        if(notificationService!=null) {
+            notificationService.send(message);
+        } else {
+            System.out.println("Unknown notification type: " + type);
+        }
+
+    }
+
 
 }
