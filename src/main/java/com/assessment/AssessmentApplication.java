@@ -1,5 +1,6 @@
 package com.assessment;
 
+import com.assessment.components.NotficationManager;
 import com.assessment.dao.BookDao;
 import com.assessment.dao.CustomerDao;
 import com.assessment.dao.OrderDao;
@@ -79,6 +80,13 @@ public class AssessmentApplication {
             );
             bookDao.saveAll(books);
 
+        };
+    }
+
+    @Bean
+    public CommandLineRunner   notify(NotficationManager notficationManager){
+        return (args) -> {
+          notficationManager.notifyUser("Notify user");
         };
     }
 
