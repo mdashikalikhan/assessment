@@ -1,6 +1,8 @@
 package com.assessment.service;
 
 import com.assessment.dto.*;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
@@ -8,17 +10,19 @@ import reactor.core.publisher.Mono;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
 public class ExternalClientService {
 
     private final WebClient webClient;
 
-    private List<ClientDto> clients;
+    private CopyOnWriteArrayList<ClientDto> clients;
 
     public ExternalClientService(WebClient.Builder builder) {
         webClient = builder.baseUrl("https://freeapi.miniprojectideas.com/api/ClientStrive").build();
-        clients = new ArrayList<>(
+        clients = new CopyOnWriteArrayList<>(
                 List.of(new ClientDto(100, "Contact1", "Company1", "Address1",
                                 "City1", "pin1", "State1", 1, "gst1", "0100", "reg1"),
                         new ClientDto(200, "Contact2", "Company2", "Address2",
@@ -85,5 +89,58 @@ public class ExternalClientService {
         }
         clients.remove(clientDto);
         return true;
+    }
+
+    public ClientResponse updateClient(ClientDto clientDto) throws JsonMappingException {
+        ClientResponse clientResponse = new ClientResponse();
+        if(clientDto == null) {
+
+             clientResponse.setResult(false);
+
+             return clientResponse;
+         }
+        if(clientDto.getClientId()==0){
+            clientResponse.setResult(true);
+            ClientDto clientMax = clients.stream().max((c1, c2) -> c1.getClientId().compareTo(c2.getClientId())).orElse(
+                    clientDto
+            );
+
+            int clientId = clientMax.getClientId() + 100;
+            clientDto.setClientId(clientId);
+
+            clients.add(clientDto);
+
+            clientResponse.setData(clients);
+            clientResponse.setMessage("Client Created");
+            return clientResponse;
+
+
+        } else {
+
+
+            ObjectMapper mapper = new ObjectMapper();
+
+
+
+            clients.stream().filter(c -> c.getClientId().equals( clientDto.getClientId()))
+                            .forEach(
+                                    c-> {
+                                        try {
+                                            mapper.updateValue(clientDto, c);
+                                        } catch (JsonMappingException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                            );
+
+            clientResponse.setData(clients);
+            clientResponse.setResult(true);
+            clientResponse.setMessage("Client Updates");
+            return clientResponse;
+
+
+
+        }
+
     }
 }
