@@ -118,18 +118,25 @@ public class ExternalClientService {
         } else {
 
 
-            ObjectMapper mapper = new ObjectMapper();
+
 
 
 
             clients.stream().filter(c -> c.getClientId().equals( clientDto.getClientId()))
                             .forEach(
                                     c-> {
-                                        try {
-                                            mapper.updateValue(clientDto, c);
-                                        } catch (JsonMappingException e) {
-                                            e.printStackTrace();
-                                        }
+
+                                           c.setCity(clientDto.getCity());
+
+                                           c.setAddress(clientDto.getAddress());
+                                           c.setState(clientDto.getState());
+                                           c.setContactNo(clientDto.getContactNo());
+                                           c.setCompanyName(clientDto.getContactNo());
+                                           c.setGstNo(clientDto.getGstNo());
+                                           c.setEmployeeStrength(clientDto.getEmployeeStrength());
+                                           c.setContactPersonName(clientDto.getContactPersonName());
+                                           c.setPinCode(clientDto.getPinCode());
+                                           c.setRegNo(clientDto.getRegNo());
                                     }
                             );
 

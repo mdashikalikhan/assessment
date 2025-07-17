@@ -38,7 +38,7 @@ public class ExternalController {
     }
 
     @PostMapping("/clients")
-    public ResponseEntity<ClientResponse> postExternalContents(@RequestBody ClientDto clientDto){
+    public ResponseEntity<ClientResponse> addClients(@RequestBody ClientDto clientDto){
         try {
             return ResponseEntity.ok(externalClientService.updateClient(clientDto));
         } catch (JsonMappingException e) {
