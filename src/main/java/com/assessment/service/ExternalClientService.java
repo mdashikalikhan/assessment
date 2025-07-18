@@ -20,6 +20,11 @@ public class ExternalClientService {
 
     private CopyOnWriteArrayList<ClientDto> clients;
 
+
+    private CopyOnWriteArrayList<EmployeeDto> employees;
+
+    private CopyOnWriteArrayList<ClientProjectDto> projects;
+
     public ExternalClientService(WebClient.Builder builder) {
         webClient = builder.baseUrl("https://freeapi.miniprojectideas.com/api/ClientStrive").build();
         clients = new CopyOnWriteArrayList<>(
@@ -35,6 +40,55 @@ public class ExternalClientService {
                                 "City5", "pin5", "State5", 5, "gst5", "0500", "reg5"),
                         new ClientDto(600, "Contact6", "Company6", "Address6",
                                 "City6", "pin6", "State6", 6, "gst6", "0600", "reg6"))
+        );
+
+        employees = new CopyOnWriteArrayList<>(
+                List.of(new EmployeeDto("EMP1", "ID-1001", "Code-1001",
+                                "emp1@gmail.com", "D-1", "R-1"),
+                        new EmployeeDto("EMP2", "ID-2001", "Code-2001",
+                                "emp2@gmail.com", "D-2", "R-2"),
+                        new EmployeeDto("EMP3", "ID-3001", "Code-3001",
+                                "emp3@gmail.com", "D-3", "R-3"),
+                        new EmployeeDto("EMP4", "ID-4001", "Code-4001",
+                                "emp4@gmail.com", "D-4", "R-4"),
+                        new EmployeeDto("EMP5", "ID-5001", "Code-5001",
+                                "emp5@gmail.com", "D-5", "R-5"),
+                        new EmployeeDto("EMP6", "ID-6001", "Code-6001",
+                                "emp6@gmail.com", "D-6", "R-6"))
+        );
+
+        projects = new CopyOnWriteArrayList<>(
+                List.of(new ClientProjectDto(1001, "P-1",
+                                "01-Jan-2010", "01-DEC-2010",
+                                "ID-1001", "31-DEC-2011",
+                                "S-1", "0100",
+                                "100", "10000", "DET1"
+                                , "p1@abc.com", "100", "Company1"),
+                        new ClientProjectDto(2001, "P-2",
+                                "01-Jan-2010", "01-DEC-2010",
+                                "ID-2001", "31-DEC-2011",
+                                "S-2", "0200",
+                                "100", "10000", "DET2"
+                                , "p2@abc.com", "200", "Company2"),
+                        new ClientProjectDto(3001,"P-3",
+                                "01-Jan-2010", "01-DEC-2010",
+                                "ID-1003", "31-DEC-2011",
+                                "S-3","0300",
+                                "100","10000","DET3"
+                                ,"p3@abc.com","300", "Company3"),
+                        new ClientProjectDto(4001,"P-4",
+                                "01-Jan-2010", "01-DEC-2010",
+                                "ID-4001", "31-DEC-2011",
+                                "S-4","0400",
+                                "400","10000","DET4"
+                                ,"p4@abc.com","400", "Company4"),
+                        new ClientProjectDto(5001,"P-5",
+                                "01-Jan-2010", "01-DEC-2010",
+                                "ID-1001", "31-DEC-2011",
+                                "S-5","0500",
+                                "100","10000","DET5"
+                                ,"p5@abc.com","500", "Company5"))
+
         );
     }
 
@@ -84,7 +138,7 @@ public class ExternalClientService {
     public boolean deleteClientById(int id) {
         ClientDto clientDto = clients.stream().filter(c -> c.getClientId() == id).findFirst()
                 .orElse(null);
-        if(clientDto == null) {
+        if (clientDto == null) {
             return false;
         }
         clients.remove(clientDto);
@@ -93,13 +147,13 @@ public class ExternalClientService {
 
     public ClientResponse updateClient(ClientDto clientDto) throws JsonMappingException {
         ClientResponse clientResponse = new ClientResponse();
-        if(clientDto == null) {
+        if (clientDto == null) {
 
-             clientResponse.setResult(false);
+            clientResponse.setResult(false);
 
-             return clientResponse;
-         }
-        if(clientDto.getClientId()==0){
+            return clientResponse;
+        }
+        if (clientDto.getClientId() == 0) {
             clientResponse.setResult(true);
             ClientDto clientMax = clients.stream().max((c1, c2) -> c1.getClientId().compareTo(c2.getClientId())).orElse(
                     clientDto
@@ -118,27 +172,23 @@ public class ExternalClientService {
         } else {
 
 
+            clients.stream().filter(c -> c.getClientId().equals(clientDto.getClientId()))
+                    .forEach(
+                            c -> {
 
+                                c.setCity(clientDto.getCity());
 
-
-
-            clients.stream().filter(c -> c.getClientId().equals( clientDto.getClientId()))
-                            .forEach(
-                                    c-> {
-
-                                           c.setCity(clientDto.getCity());
-
-                                           c.setAddress(clientDto.getAddress());
-                                           c.setState(clientDto.getState());
-                                           c.setContactNo(clientDto.getContactNo());
-                                           c.setCompanyName(clientDto.getContactNo());
-                                           c.setGstNo(clientDto.getGstNo());
-                                           c.setEmployeeStrength(clientDto.getEmployeeStrength());
-                                           c.setContactPersonName(clientDto.getContactPersonName());
-                                           c.setPinCode(clientDto.getPinCode());
-                                           c.setRegNo(clientDto.getRegNo());
-                                    }
-                            );
+                                c.setAddress(clientDto.getAddress());
+                                c.setState(clientDto.getState());
+                                c.setContactNo(clientDto.getContactNo());
+                                c.setCompanyName(clientDto.getContactNo());
+                                c.setGstNo(clientDto.getGstNo());
+                                c.setEmployeeStrength(clientDto.getEmployeeStrength());
+                                c.setContactPersonName(clientDto.getContactPersonName());
+                                c.setPinCode(clientDto.getPinCode());
+                                c.setRegNo(clientDto.getRegNo());
+                            }
+                    );
 
             clientResponse.setData(clients);
             clientResponse.setResult(true);
@@ -146,8 +196,23 @@ public class ExternalClientService {
             return clientResponse;
 
 
-
         }
 
+    }
+
+    public Mono<EmployeeResponse> getAllEmployees() {
+        EmployeeResponse employeeResponse = new EmployeeResponse();
+        employeeResponse.setMessage("All Employees");
+        employeeResponse.setData(employees);
+        employeeResponse.setResult(true);
+        return Mono.just(employeeResponse);
+    }
+
+    public Mono<ClientProjectResponse> getProjects() {
+        ClientProjectResponse clientProjectResponse = new ClientProjectResponse();
+        clientProjectResponse.setMessage("All Projects");
+        clientProjectResponse.setData(projects);
+        clientProjectResponse.setResult(true);
+        return Mono.just(clientProjectResponse);
     }
 }

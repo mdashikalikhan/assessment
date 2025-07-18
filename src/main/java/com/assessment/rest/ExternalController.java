@@ -1,9 +1,6 @@
 package com.assessment.rest;
 
-import com.assessment.dto.ClientDto;
-import com.assessment.dto.ClientResponse;
-import com.assessment.dto.DesignationResponse;
-import com.assessment.dto.RoleDto;
+import com.assessment.dto.*;
 import com.assessment.service.ExternalClientService;
 import com.assessment.service.ExternalService;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -68,6 +65,16 @@ public class ExternalController {
         } else {
             return Mono.just(ResponseEntity.notFound().build());
         }
+    }
+
+    @GetMapping("/employees") public Mono<EmployeeResponse> getEmployees(){
+        return externalClientService.getAllEmployees();
+    }
+
+
+    @GetMapping("/clientProjects")
+    public Mono<ClientProjectResponse> getProjects(){
+        return externalClientService.getProjects();
     }
 
 }
