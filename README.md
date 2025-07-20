@@ -35,7 +35,15 @@ Set up garana dashboard using foolowing id:
 <li>10231 → Spring Boot Micrometer</li>
 
 <li> 12900 → JVM Overview</li>
-<ul>
+</ul>
+
+
+Performance Test of blocking and non blocking endpoints using ApacheBench: <br/><br/>
+
+Thread Bocking: ab -n 500 -c 500 http://localhost:8080/mvc/data <br/>
+
+Non Blocking (event-loop): ab -n 500 -c 500 http://localhost:8080/webflux/data <br/> <br/>
+
 
 
 The application will start on <b>http://localhost:8080</b>
