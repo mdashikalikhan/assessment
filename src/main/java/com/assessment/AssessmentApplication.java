@@ -93,7 +93,7 @@ public class AssessmentApplication {
     @Transactional("mySQLTransactionManager")
     public CommandLineRunner loadMySQLDatabase(DepartmentDao departmentDao) {
         return runner -> {
-            if ((long) departmentDao.findAll().size() > 0) {
+            if (departmentDao.getDepartmentCount() > 0) {
                 return;
             }
 

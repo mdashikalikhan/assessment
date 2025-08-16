@@ -19,4 +19,8 @@ public class DepartmentService {
     public List<Department> getAllDepartmentsWithEmployees() {
         return departmentDao.findAll();
     }
+
+    public Department getDepartmentById(Long id){
+        return departmentDao.findById(id).orElseThrow(()->new RuntimeException("Id not found: " + id));
+    }
 }
