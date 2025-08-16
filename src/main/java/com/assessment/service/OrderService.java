@@ -1,7 +1,7 @@
 package com.assessment.service;
 
-import com.assessment.dao.OrderDao;
-import com.assessment.entity.Order;
+import com.assessment.dao.h2.OrderDao;
+import com.assessment.entity.h2.Order;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;

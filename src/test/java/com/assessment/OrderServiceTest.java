@@ -1,8 +1,8 @@
 package com.assessment;
 
-import com.assessment.dao.OrderDao;
-import com.assessment.entity.Customer;
-import com.assessment.entity.Order;
+import com.assessment.dao.h2.OrderDao;
+import com.assessment.entity.h2.Customer;
+import com.assessment.entity.h2.Order;
 import com.assessment.service.OrderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

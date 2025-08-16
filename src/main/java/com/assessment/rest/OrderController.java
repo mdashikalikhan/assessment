@@ -1,7 +1,6 @@
 package com.assessment.rest;
 
-import com.assessment.dao.OrderDao;
-import com.assessment.entity.Order;
+import com.assessment.entity.h2.Order;
 import com.assessment.service.OrderService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;

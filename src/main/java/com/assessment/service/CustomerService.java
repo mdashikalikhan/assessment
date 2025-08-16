@@ -1,18 +1,10 @@
 package com.assessment.service;
 
-import com.assessment.dao.CustomerDao;
-import com.assessment.entity.Customer;
-import com.assessment.entity.Order;
+import com.assessment.dao.h2.CustomerDao;
+import com.assessment.entity.h2.Customer;
 import jakarta.transaction.Transactional;
-import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 import java.util.Optional;

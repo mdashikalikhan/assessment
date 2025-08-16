@@ -1,6 +1,5 @@
-package com.assessment.entity;
+package com.assessment.entity.h2;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;

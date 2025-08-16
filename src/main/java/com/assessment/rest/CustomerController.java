@@ -1,18 +1,11 @@
 package com.assessment.rest;
 
-import com.assessment.entity.Customer;
-import com.assessment.entity.Order;
+import com.assessment.entity.h2.Customer;
 import com.assessment.service.CustomerService;
 import jakarta.validation.Valid;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.propertyeditors.StringTrimmerEditor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;

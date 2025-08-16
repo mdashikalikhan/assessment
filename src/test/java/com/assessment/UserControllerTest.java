@@ -1,6 +1,6 @@
 package com.assessment;
 
-import com.assessment.entity.User;
+import com.assessment.entity.h2.User;
 import com.assessment.rest.UserController;
 import com.assessment.service.UserService;
 import org.junit.jupiter.api.Assertions;

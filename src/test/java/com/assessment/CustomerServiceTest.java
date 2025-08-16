@@ -1,7 +1,7 @@
 package com.assessment;
 
-import com.assessment.dao.CustomerDao;
-import com.assessment.entity.Customer;
+import com.assessment.dao.h2.CustomerDao;
+import com.assessment.entity.h2.Customer;
 import com.assessment.service.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,8 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import org.junit.jupiter.api.*;
-import org.mockito.*;
 import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;

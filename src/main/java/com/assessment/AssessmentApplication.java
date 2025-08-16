@@ -2,21 +2,25 @@ package com.assessment;
 
 import com.assessment.components.DynamicNotificationManager;
 import com.assessment.components.NotficationManager;
-import com.assessment.dao.BookDao;
-import com.assessment.dao.CustomerDao;
-import com.assessment.dao.OrderDao;
-import com.assessment.entity.Book;
-import com.assessment.entity.Customer;
-import com.assessment.entity.Order;
-import jakarta.transaction.Transactional;
+import com.assessment.dao.h2.BookDao;
+import com.assessment.dao.h2.CustomerDao;
+import com.assessment.dao.h2.OrderDao;
+import com.assessment.dao.mysql.DepartmentDao;
+import com.assessment.dao.mysql.EmployeeDao;
+import com.assessment.entity.h2.Book;
+import com.assessment.entity.h2.Customer;
+import com.assessment.entity.h2.Order;
+
+import com.assessment.entity.mysql.Department;
+import com.assessment.entity.mysql.Employee;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.IntStream;
@@ -37,7 +41,7 @@ public class AssessmentApplication {
      * @return
      */
     @Bean
-    @Transactional
+    @Transactional("h2TransactionManager")
     public CommandLineRunner loadDatabase(CustomerDao customerDao,
                                           OrderDao orderDao,
                                           BookDao bookDao) {
@@ -84,15 +88,45 @@ public class AssessmentApplication {
         };
     }
 
+
     @Bean
-    public CommandLineRunner   notify(NotficationManager notficationManager){
-        return (args) -> {
-          notficationManager.notifyUser("Notify user");
+    @Transactional("mySQLTransactionManager")
+    public CommandLineRunner loadMySQLDatabase(DepartmentDao departmentDao) {
+        return runner -> {
+            if ((long) departmentDao.findAll().size() > 0) {
+                return;
+            }
+
+
+            Department engineering = new Department("Engineering");
+
+
+            engineering.addEmployee(new Employee("MD ASHIK ALI KHAN", BigDecimal.valueOf(200000)),
+                    new Employee("RAFIQ", BigDecimal.valueOf(100000)),
+                    new Employee("KARIM", BigDecimal.valueOf(50000)));
+
+
+            Department hr = new Department("HR");
+
+            hr.addEmployee(new Employee("AKHTERUZZAMAN", BigDecimal.valueOf(100000)),
+                    new Employee("KAMAL", BigDecimal.valueOf(50000)),
+                    new Employee("JAMAL", BigDecimal.valueOf(25000)));
+
+            departmentDao.saveAll(
+                    List.of(engineering, hr)
+            );
         };
     }
 
     @Bean
-    public CommandLineRunner notifyByType(DynamicNotificationManager notificationManager){
+    public CommandLineRunner notify(NotficationManager notficationManager) {
+        return (args) -> {
+            notficationManager.notifyUser("Notify user");
+        };
+    }
+
+    @Bean
+    public CommandLineRunner notifyByType(DynamicNotificationManager notificationManager) {
         return args -> {
             notificationManager.notifyUser("walletService", "wallet message");
             notificationManager.notifyUser("smsService", "SMS message");

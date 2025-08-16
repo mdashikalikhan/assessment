@@ -1,7 +1,7 @@
 package com.assessment;
 
-import com.assessment.dao.UserDao;
-import com.assessment.entity.User;
+import com.assessment.dao.h2.UserDao;
+import com.assessment.entity.h2.User;
 import com.assessment.service.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

@@ -1,8 +1,8 @@
 package com.assessment.service;
 
-import com.assessment.dao.BookDao;
+import com.assessment.dao.h2.BookDao;
 import com.assessment.dto.BookDto;
-import com.assessment.entity.Book;
+import com.assessment.entity.h2.Book;
 import com.assessment.exception.BookNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

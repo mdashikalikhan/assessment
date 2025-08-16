@@ -1,6 +1,6 @@
 package com.assessment.rest;
 
-import com.assessment.entity.User;
+import com.assessment.entity.h2.User;
 import com.assessment.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;

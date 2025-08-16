@@ -1,7 +1,7 @@
 package com.assessment.service;
 
-import com.assessment.dao.UserDao;
-import com.assessment.entity.User;
+import com.assessment.dao.h2.UserDao;
+import com.assessment.entity.h2.User;
 import com.assessment.exception.UserNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

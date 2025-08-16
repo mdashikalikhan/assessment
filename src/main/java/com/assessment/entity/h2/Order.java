@@ -1,4 +1,4 @@
-package com.assessment.entity;
+package com.assessment.entity.h2;
 
 import com.assessment.entity.converter.BooleanToIntegerConverter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
