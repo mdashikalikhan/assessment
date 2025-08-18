@@ -40,6 +40,9 @@ spring:
     console:
       enabled: true
       path: /h2
+  mvc:
+    async:
+      request-timeout: 5000
 
 logging:
   level:
@@ -65,6 +68,7 @@ server:
     accept-count: 15
     threads:
       max: 10
+    connection-timeout: 5s
 
 
 ---
