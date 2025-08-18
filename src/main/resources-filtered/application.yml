@@ -1,0 +1,126 @@
+spring:
+  application:
+    name: @app.name@
+  profiles:
+    active: @spring.profiles.active@
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    h2:
+      jdbc-url: jdbc:h2:mem:assessdb
+      driver-class-name: org.h2.Driver
+      username: sa
+      password: sa
+
+    mysql:
+      jdbc-url: jdbc:mysql://localhost:3306/assessment?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+    hikari:
+      minimum-idle: 3
+      maximum-pool-size: 40
+      idle-timeout: 12000
+      max-lifetime: 2000000
+      connection-timeout: 6000
+      pool-name: HikariPool_ASSESSMENT
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+logging:
+  level:
+    org.springframework.web: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    prometheus:
+      enabled: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  server:
+    port: 7179
+
+server:
+  tomcat:
+    accept-count: 15
+    threads:
+      max: 10
+
+
+---
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    h2:
+      jdbc-url: jdbc:h2:mem:assessdb
+      driver-class-name: org.h2.Driver
+      username: sa
+      password: sa
+
+    mysql:
+      jdbc-url: jdbc:mysql://localhost:3306/assessment?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+    hikari:
+      minimum-idle: 3
+      maximum-pool-size: 40
+      idle-timeout: 12000
+      max-lifetime: 2000000
+      connection-timeout: 6000
+      pool-name: HikariPool_ASSESSMENT
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  h2:
+    console:
+      enabled: true
+      path: /h2
+
+logging:
+  level:
+    org.springframework.web: info
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    prometheus:
+      enabled: true
+  prometheus:
+    metrics:
+      export:
+        enabled: true
+  server:
+    port: 7179
+
+
