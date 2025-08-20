@@ -67,7 +67,7 @@ server:
   tomcat:
     accept-count: 15
     threads:
-      max: 10
+      max: 200
     connection-timeout: 5s
 
 
