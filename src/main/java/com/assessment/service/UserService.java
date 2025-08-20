@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class    UserService {
     private final UserDao userDao;
 
     public User getUserById(Long id){
