@@ -1,6 +1,7 @@
 package com.assessment.rest;
 
 import com.assessment.entity.h2.User;
+import com.assessment.model.MySqlUserModel;
 import com.assessment.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,4 +24,10 @@ public class UserController {
     public ResponseEntity<User> createUser(@RequestBody User user){
         return new ResponseEntity<>(userService.createUser(user), HttpStatus.CREATED);
     }
+
+    @GetMapping("/mysql/{id}")
+    public ResponseEntity<MySqlUserModel> getMySQLUser(@PathVariable("id") Long id){
+        return ResponseEntity.ok(userService.getMySQLUserById(id));
+    }
+
 }

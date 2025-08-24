@@ -13,6 +13,7 @@ import com.assessment.entity.h2.Order;
 
 import com.assessment.entity.mysql.Department;
 import com.assessment.entity.mysql.Employee;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -132,6 +133,11 @@ public class AssessmentApplication {
             notificationManager.notifyUser("smsService", "SMS message");
             notificationManager.notifyUser("emailService", "Email message");
         };
+    }
+
+    @Bean
+    public ModelMapper mapper(){
+        return new ModelMapper();
     }
 
 }
