@@ -1,5 +1,5 @@
 # assessment
-This is a pilot project of Spring boot 3  with in memory DB
+This is a pilot project of Spring boot 3  with in memory H2 DB and MySQL DB
 
 <br/>
 
