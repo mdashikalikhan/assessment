@@ -128,3 +128,35 @@ management:
     port: 7179
 
 
+---
+
+spring:
+  config:
+    activate:
+      on-profile: test
+
+  datasource:
+    h2:
+      jdbc-url: jdbc:h2:mem:assessdb
+      driver-class-name: org.h2.Driver
+      username: sa
+      password: sa
+
+    mysql:
+      jdbc-url: jdbc:mysql://localhost:3306/assessment?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+    hikari:
+      minimum-idle: 3
+      maximum-pool-size: 40
+      idle-timeout: 12000
+      max-lifetime: 2000000
+      connection-timeout: 6000
+      pool-name: HikariPool_ASSESSMENT
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop

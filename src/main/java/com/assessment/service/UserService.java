@@ -8,6 +8,7 @@ import com.assessment.model.MySqlUserModel;
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @AllArgsConstructor
@@ -29,6 +30,13 @@ public class    UserService {
     public MySqlUserModel getMySQLUserById(Long id){
         com.assessment.entity.mysql.User user = mysqlUserDao.findById(id).orElseThrow(()-> new UserNotFoundException(id));
         return modelMapper.map(user, MySqlUserModel.class);
+    }
+
+    @Transactional("mySQLTransactionManager")
+    public MySqlUserModel createMySQLUser(MySqlUserModel mySqlUserModel){
+        com.assessment.entity.mysql.User user = modelMapper.map(mySqlUserModel, com.assessment.entity.mysql.User.class);
+        com.assessment.entity.mysql.User save = mysqlUserDao.save(user);
+        return modelMapper.map(save, MySqlUserModel.class);
     }
 
 }
