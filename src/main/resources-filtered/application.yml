@@ -1,8 +1,17 @@
 spring:
   application:
     name: @app.name@
+    admin:
+      enabled:
   profiles:
     active: @spring.profiles.active@
+
+app:
+  name: Assessment
+  version: 1.0.0
+  server:
+    host: localhost
+    port: 8080
 
 ---
 
